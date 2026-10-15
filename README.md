@@ -2,7 +2,9 @@
 
 ## Project Overview
 
-This project is a hands-on web application development project. It demonstrates a student project tracker with a frontend, backend API, and cloud PostgreSQL database.
+This is a hands-on web application development project that demonstrates how to build a student project tracker with a frontend, backend API, and cloud database.
+
+The application allows users to create, view, update, and delete student project records.
 
 ## Technology Stack
 
@@ -10,67 +12,82 @@ This project is a hands-on web application development project. It demonstrates 
 - **Backend:** Node.js and Express
 - **Hosting:** Vercel
 - **Database:** Supabase PostgreSQL
+- **Version Control:** Git and GitHub
 
 ## Local Development
 
 ### Prerequisites
 
-- Node.js compatible with the version specified in `package.json`
+- Node.js 22.x
 - npm
 - A Supabase PostgreSQL database
 
-### Setup
+### Setup Instructions
 
-1. Install the project dependencies:
+1. Install dependencies from the lockfile:
 
-   ```bash
+   ```powershell
    npm.cmd ci
    ```
 
 2. Create a private `.env` file in the project root using `.env.example` as a template.
 
-3. Add the database connection string to `.env`:
+3. Add your Supabase connection string to `.env`:
 
    ```env
    DATABASE_URL=your_private_database_connection_string
    ```
 
-   Replace the placeholder with your actual connection string. Never commit `.env` or expose database credentials in frontend code.
+   Replace the placeholder with your actual database connection string. Never commit your private `.env` file to GitHub.
 
-4. Set up the database table by running the SQL in `schema.sql` against your Supabase PostgreSQL database.
+4. Run the SQL statements in `schema.sql` against your Supabase PostgreSQL database to create the required table.
 
-5. Start the local server:
+5. Start the local application:
 
-   ```bash
+   ```powershell
    npm.cmd start
    ```
 
-6. Open `http://localhost:3000` in your browser.
+6. Open the application in your browser:
+
+   http://localhost:3000
 
 ## Database Configuration
 
-`DATABASE_URL` is a server-only environment variable. Configure it locally in `.env` and configure it as an environment variable in the hosting platform for deployment. Do not expose it to browser JavaScript or commit its value to Git.
+The application uses Supabase PostgreSQL to store project records.
 
-The `schema.sql` file defines the database table required by the application.
+- `database.js` contains the database access functions.
+- `schema.sql` defines the table required by the application.
+- `DATABASE_URL` is a server-only environment variable.
+- The database connection string must never be exposed in frontend JavaScript or committed to Git.
 
-## Demo Data and Authentication
+For deployment, configure `DATABASE_URL` in the hosting platform's environment variables.
 
-This application uses shared demo records and does not currently require users to sign in. Anyone who can access the application may be able to view or modify the shared records, depending on the deployed API configuration.
+## Demo Records and Authentication
 
-Do not store private or sensitive information in the demo application.
+The application uses shared demo records and does not currently require users to sign in.
+
+Users accessing the same deployed database share the same project records. The application is intended for demonstration purposes, so do not store sensitive or confidential information.
 
 ## Deployment
 
-The intended hosting platform is Vercel, with Supabase PostgreSQL as the database.
+The planned deployment uses:
 
-**Hosted URL:** To be added after deployment.
+- **Application hosting:** Vercel
+- **Database hosting:** Supabase PostgreSQL
 
-Before deployment, configure the required environment variables and verify that the hosting setup supports the application's server/API entry point.
+**Hosted URL:** To be added after successful deployment.
+
+Deployment is not considered complete until the hosted application and its database connection have been tested.
 
 ## Data Migration
 
-Existing local SQLite rows are not migrated automatically. Any records stored in a local SQLite database must be migrated separately if they are needed in Supabase PostgreSQL.
+Existing local SQLite rows are not automatically migrated to Supabase PostgreSQL.
+
+Any SQLite records that need to be retained must be exported and migrated separately.
 
 ## Verification Status
 
-Record only checks that have actually been completed. Do not mark deployment, database persistence, or other tests as successful until they have been verified.
+Record only checks that have actually been completed.
+
+Do not claim successful deployment, database persistence, or API testing unless those checks have been performed and verified.
